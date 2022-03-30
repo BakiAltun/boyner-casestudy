@@ -30,6 +30,12 @@ namespace Boyner.CaseStudy.Presentation.Api.Controllers
             return await _meditor.Send(new GetPostPagedListQuery(page, pageSize));
         }
 
+        [HttpGet("{id}")]
+        public async Task<PostResult.Item> Get(string id)
+        {   
+            return await _meditor.Send(new GetPostByIdQuery(id));
+        }
+
         [HttpPost]
         public void Post(PostResult.Item item)
         {

@@ -2,34 +2,42 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-@Injectable()
+import { environment } from 'src/environments/environment';
+@Injectable({
+    providedIn: 'root',
+})
 export class PostService {
 
     constructor(private http: HttpClient) { }
-
-    getPost() {
-        return this.http.get<Post>("/Post").pipe(
+    getById(id: string) {
+        return this.http.get<any>(environment.apiUrl + "Post/" + id).pipe(
+            retry(3), // retry a failed request up to 3 times
+            catchError(this.handleError) // then handle the error
+        );
+    }
+    getAll(page: number, pageSize: number) {
+        return this.http.get<any>(environment.apiUrl + 'Post?page=' + page + "&pageSize=" + pageSize).pipe(
             retry(3), // retry a failed request up to 3 times
             catchError(this.handleError) // then handle the error
         );
     }
 
-    savePost(post: Post) {
-
-        if (post.id > 0) return this.updatePost(post);
+    save(post: Post) {
+debugger
+        if (post.id && post.id.length> 0  && post.id !== "0") return this.updatePost(post);
 
         return this.addPost(post);
     }
 
     addPost(post: Post): Observable<Post> {
-        return this.http.post<Post>("/Post", post, httpOptions)
+        return this.http.post<Post>(environment.apiUrl + "Post", post, httpOptions)
             .pipe(
                 catchError(() => this.handleError2('addPost', post))
             );
     }
 
     updatePost(post: Post): Observable<Post> {
-        return this.http.post<Post>("/Post/" + post.id, post, httpOptions)
+        return this.http.put<Post>(environment.apiUrl + "Post/" + post.id, post, httpOptions)
             .pipe(
                 catchError(() => this.handleError2('addPost', post))
             );
@@ -54,12 +62,12 @@ export class PostService {
 
 const httpOptions = {
     headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: 'my-auth-token'
+        // 'Content-Type': 'application/json',
+        // Authorization: 'my-auth-token'
     })
 };
 export interface Post {
-    id: number,
+    id: string |null,
     text?: string,
     createdOn?: Date,
     updatedOn?: Date

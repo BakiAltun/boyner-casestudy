@@ -5,6 +5,7 @@ import { PostListComponent } from './post-list/post-list.component';
 import { PostFormComponent } from './shared/post-form/post-form.component';
 import { PostRoutingModule } from './post-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PostService } from './shared/post.service';
 
 
 
@@ -12,12 +13,13 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     PostRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule 
   ],
   declarations: [
     PostDetailComponent,
     PostListComponent,
-    PostFormComponent
-  ], 
+    PostFormComponent,
+
+  ] 
 })
 export class PostModule { }

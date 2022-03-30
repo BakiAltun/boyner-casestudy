@@ -26,11 +26,14 @@ namespace Boyner.CaseStudy.Infrastructure.Data
 
         public async Task<List<T>> GetAsync() =>
             await _collection.Find(_ => true).ToListAsync();
-            
+
         public async Task<List<T>> GetPagedListAsync(int page, int pageSize) =>
             await _collection.Find(_ => true).Skip((page - 1) * pageSize).Limit(pageSize).ToListAsync();
 
-        public async Task<List<T>> GetPagedListAsync(int page, int pageSize, Expression<Func<T, object>> sortByDescending)  =>
+        public async Task<long> CountAsync() =>
+            await _collection.Find(_ => true).CountAsync();
+
+        public async Task<List<T>> GetPagedListAsync(int page, int pageSize, Expression<Func<T, object>> sortByDescending) =>
             await _collection.Find(_ => true).Skip((page - 1) * pageSize)
             .Limit(pageSize)
             .SortByDescending(sortByDescending)

@@ -7,23 +7,20 @@ using System.Threading.Tasks;
 using Boyner.CaseStudy.ApplicationCore.Entities;
 namespace Boyner.CaseStudy.ApplicationCore.Queries.PostQueries
 {
-    public class GetPostPagedListQueryHandler : IRequestHandler<GetPostPagedListQuery, PostResult>
+    public class GetPostByIdQueryHandler : IRequestHandler<GetPostByIdQuery, PostResult.Item>
     {
         private readonly IMongoRepository<Post> _mongoRepository;
 
-        public GetPostPagedListQueryHandler(IMongoRepository<Post> mongoRepository)
+        public GetPostByIdQueryHandler(IMongoRepository<Post> mongoRepository)
         {
             _mongoRepository = mongoRepository;
         }
 
-        public async Task<PostResult> Handle(GetPostPagedListQuery query, CancellationToken cancellationToken)
+        public async Task<PostResult.Item> Handle(GetPostByIdQuery query, CancellationToken cancellationToken)
         {
-            var list = await _mongoRepository.GetPagedListAsync(query.Page, query.PageSize, o => o.Id);
-            var total = await _mongoRepository.CountAsync();
-            return new PostResult(list.Select(MapToModel).ToList())
-            {
-                TotalItems = total
-            };
+            var entity = await _mongoRepository.GetAsync(query.Id);
+
+            return MapToModel(entity);
         }
 
         private PostResult.Item MapToModel(Post requestModel)

@@ -8,7 +8,7 @@ import { PostService, Post } from '../shared/post.service';
   templateUrl: './post-detail.component.html'
 })
 export class PostDetailComponent implements OnInit {
-  id: number = 0;
+  id: string | null = "";
   form = new FormGroup({
     text: new FormControl(''),
   });
@@ -20,12 +20,27 @@ export class PostDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.id = params['id'];
-    });
+    // this.route.queryParams.subscribe(params => {
+    //   this.id = params['id'];
 
-    // this.id = this.route.snapshot.paramMap.get('id');
+    // });
+
+    this.id = this.route.snapshot.paramMap.get('id');
+    if (this.id && this.id.length > 0 && this.id !== "0")
+      this.getData();
   }
+
+  getData() {
+
+    this.postService
+      .getById(this.id || "")
+      .subscribe((res) => {
+        this.form.patchValue({
+          text: res.text
+        });
+      });
+  }
+
   onSubmit() {
 
     var model: Post = {
@@ -33,9 +48,9 @@ export class PostDetailComponent implements OnInit {
       text: this.form.get("text")?.value
     };
 
-    this.postService.savePost(model)
+    this.postService.save(model)
       .subscribe((res) => {
-        this.router.navigate([''], { relativeTo: this.route });
+        this.router.navigate(['/post'], { relativeTo: this.route });
       });
 
   }

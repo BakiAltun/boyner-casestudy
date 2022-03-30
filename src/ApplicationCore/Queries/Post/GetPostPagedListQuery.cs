@@ -17,8 +17,10 @@ namespace Boyner.CaseStudy.ApplicationCore.Queries.PostQueries
     }
 
     public class PostResult
-    { 
+    {
         public IList<Item> Items { get; set; }
+        public long TotalItems { get; set; }
+
         public PostResult(IList<Item> items)
         {
             Items = items;

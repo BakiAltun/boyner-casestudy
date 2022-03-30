@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PostDetailComponent } from './views/post/post-detail/post-detail.component';
 
-const routes: Routes = [
+const routes: Routes = [ 
+  {
+    path: '', redirectTo: "/post", pathMatch: "full"
+  },
   {
     path: '',
     // component: AuthComponent
@@ -13,10 +15,7 @@ const routes: Routes = [
         data: { title: "Post" }
       }
     ]
-  },
-  // {
-  //   path: '', redirectTo: "/dashboard", pathMatch: "full"
-  // }
+  }
 ];
 
 @NgModule({

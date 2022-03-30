@@ -28,15 +28,24 @@ namespace Boyner.CaseStudy.Presentation.Api
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
-        {
+        {   services.AddCors(o => o.AddPolicy("CorePolicy", builder =>
+{
+    builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+}));
             services.AddRabbitMQ(Configuration);
             services.AddMediatR(Configuration);
             services.AddDatabase(Configuration);
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                // options.JsonSerializerOptions.PropertyNamingPolicy = null;
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Boyner.CaseStudy.Presentation.Api", Version = "v1" });
             });
+         
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -46,6 +55,7 @@ namespace Boyner.CaseStudy.Presentation.Api
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Boyner.CaseStudy.Presentation.Api v1"));
+                app.UseCors("CorePolicy");
             }
 
             app.UseStaticFiles();

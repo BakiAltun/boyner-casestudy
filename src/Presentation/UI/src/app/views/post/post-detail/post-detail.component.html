@@ -1,6 +1,7 @@
 <form  [formGroup]="form" (ngSubmit)="onSubmit()">
-    <label>Text</label>
-    <textarea name="Text" formControlName="text"></textarea>
+    <label class="font-weight-bold">Açıklama</label>
+     
+    <textarea name="Text" formControlName="text" class="form-control"></textarea>
 
-    <button type="submit"> Gönder </button>
+    <button type="submit" class="card card-small mt-2"> Gönder </button>
 </form>

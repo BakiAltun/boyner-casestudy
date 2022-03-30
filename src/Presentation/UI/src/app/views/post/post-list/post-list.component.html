@@ -16,11 +16,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>test test</td>
-                <td>test test</td>
-                <td> <a routerLink="1"> Düzenle </a></td>
+            <tr *ngFor="let d of data;  trackBy: trackByFn">
+                <td>{{d.id}}</td>
+                <td>{{d.text}}</td>
+                <td>{{d.createdOn}}</td>
+                <td> <a routerLink="{{d.id}}"> Düzenle </a></td>
             </tr>
         </tbody>
     </table>
@@ -28,8 +28,9 @@
 </div>
 <div>
     <ul class="pagination">
-        <li class="card card-small"><a href="">1</a></li>
-        <li class="card card-small"><a href="">2</a></li>
-        <li class="card card-small"><a href="">3</a></li>
+        <li class="card card-small" *ngFor="let in of totalItems  ;let i = index" (click)="getData(i + 1, 10)"  >
+            <a href="javascript:;">{{i + 1}}</a>
+            <!-- [routerLink]="['/post', i]" -->
+        </li>
     </ul>
 </div>
