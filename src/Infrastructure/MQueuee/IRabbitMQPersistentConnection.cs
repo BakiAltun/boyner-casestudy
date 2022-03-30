@@ -3,7 +3,7 @@
 using System;
 using RabbitMQ.Client;
 
-namespace Boyner.CaseStudy.Infrastructure.Data
+namespace Boyner.CaseStudy.Infrastructure.RabbitMQ
 {
     public interface IRabbitMQPersistentConnection
         : IDisposable

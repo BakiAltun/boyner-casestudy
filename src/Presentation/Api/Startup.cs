@@ -1,3 +1,6 @@
+using Boyner.CaseStudy.Infrastructure.Data;
+using Boyner.CaseStudy.Infrastructure.MediatR;
+using Boyner.CaseStudy.Infrastructure.RabbitMQ;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -26,7 +29,9 @@ namespace Boyner.CaseStudy.Presentation.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddRabbitMQ(Configuration);
+            services.AddMediatR(Configuration);
+            services.AddDatabase(Configuration);
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

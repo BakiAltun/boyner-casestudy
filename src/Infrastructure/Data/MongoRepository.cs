@@ -30,10 +30,10 @@ namespace Boyner.CaseStudy.Infrastructure.Data
         public async Task<List<T>> GetPagedListAsync(int page, int pageSize) =>
             await _collection.Find(_ => true).Skip((page - 1) * pageSize).Limit(pageSize).ToListAsync();
 
-        public async Task<List<T>> GetPagedListAsync(int page, int pageSize, Expression<Func<T, object>> sortBy)  =>
+        public async Task<List<T>> GetPagedListAsync(int page, int pageSize, Expression<Func<T, object>> sortByDescending)  =>
             await _collection.Find(_ => true).Skip((page - 1) * pageSize)
             .Limit(pageSize)
-            .SortBy(sortBy)
+            .SortByDescending(sortByDescending)
             .ToListAsync();
 
         public async Task<T> GetAsync(string id) =>

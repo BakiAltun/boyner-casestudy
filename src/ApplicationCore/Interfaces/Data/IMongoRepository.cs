@@ -11,7 +11,7 @@ namespace Boyner.CaseStudy.ApplicationCore.Interfaces.Data
     {
         Task<List<T>> GetAsync();
         Task<List<T>> GetPagedListAsync(int page, int pageSize);
-        Task<List<T>> GetPagedListAsync(int page, int pageSize, Expression<Func<T, object>> sortBy);
+        Task<List<T>> GetPagedListAsync(int page, int pageSize, Expression<Func<T, object>> sortByDescending);
         Task<T> GetAsync(string id);
         Task CreateAsync(T newBook);
         Task UpdateAsync(string id, T updatedBook);

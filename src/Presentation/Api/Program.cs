@@ -1,5 +1,7 @@
+using Boyner.CaseStudy.Infrastructure.RabbitMQ;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -21,6 +23,12 @@ namespace Boyner.CaseStudy.Presentation.Api
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                    // webBuilder
+                }).ConfigureServices((context, services) =>
+                {
+                    services.AddHostedService<PostRabbitMQConsumer>();
+
+                })
+                ;
     }
 }

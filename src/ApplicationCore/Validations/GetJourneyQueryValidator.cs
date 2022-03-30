@@ -1,4 +1,5 @@
 ﻿using Boyner.CaseStudy.ApplicationCore.Queries;
+using Boyner.CaseStudy.ApplicationCore.Queries.PostQueries;
 using FluentValidation; 
 
 namespace Boyner.CaseStudy.ApplicationCore.Validations

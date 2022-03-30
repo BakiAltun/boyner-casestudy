@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Boyner.CaseStudy.ApplicationCore.Queries
+namespace Boyner.CaseStudy.ApplicationCore.Queries.PostQueries
 {
     public class GetPostPagedListQuery : IRequest<PostResult>
     {
@@ -19,10 +19,14 @@ namespace Boyner.CaseStudy.ApplicationCore.Queries
     public class PostResult
     { 
         public IList<Item> Items { get; set; }
+        public PostResult(IList<Item> items)
+        {
+            Items = items;
+        }
 
         public class Item
         {
-            public long Id { get; set; }
+            public string Id { get; set; }
 
             /// <summary>
             /// Açıklama

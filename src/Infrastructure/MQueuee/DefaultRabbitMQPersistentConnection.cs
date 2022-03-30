@@ -10,7 +10,7 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.Exceptions;
 
-namespace Boyner.CaseStudy.Infrastructure.Data
+namespace Boyner.CaseStudy.Infrastructure.RabbitMQ
 {
     public class DefaultRabbitMQPersistentConnection
         : IRabbitMQPersistentConnection

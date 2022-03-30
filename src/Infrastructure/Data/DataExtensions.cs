@@ -11,7 +11,7 @@ namespace Boyner.CaseStudy.Infrastructure.Data
 
             // Add services to the container.
             services.Configure<DefaultMongoDatabaseSettings>(configuration.GetSection("MongoDatabase"));
-            services.AddScoped(typeof(IMongoRepository<>), typeof(MongoRepository<>));
+            services.AddSingleton(typeof(IMongoRepository<>), typeof(MongoRepository<>));
 
             
             return services;
