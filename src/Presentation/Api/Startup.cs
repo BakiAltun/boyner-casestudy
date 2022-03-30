@@ -70,16 +70,16 @@ namespace Boyner.CaseStudy.Presentation.Api
                 endpoints.MapControllers();
             });
 
-            //app.Use(async (context, next) =>
-            //{
-            //    await next();
+            app.Use(async (context, next) =>
+            {
+               await next();
 
-            //    if (context.Response.StatusCode == 404 && !context.Request.Path.Value.Contains("/api"))
-            //    {
-            //        context.Request.Path = new PathString("/index.html");
-            //        await next.Invoke();
-            //    }
-            //});
+               if (context.Response.StatusCode == 404 ) // && !context.Request.Path.Value.Contains("/api")
+               {
+                   context.Request.Path = new PathString("/index.html");
+                   await next.Invoke();
+               }
+            });
 
         }
     }
