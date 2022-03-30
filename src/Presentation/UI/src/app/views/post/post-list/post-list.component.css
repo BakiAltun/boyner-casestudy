@@ -1,0 +1,24 @@
+.pagination
+{
+ padding: 0%;
+ margin: 0%;
+ float: left;
+ margin-top: 2rem;
+}
+
+.pagination li{
+
+    display: inline-block;
+    padding: 0.5rem 1rem;
+}
+
+.table{
+    width: 100%;
+    float: left;
+    border: 1px solid ;
+}
+
+.card.card-small{
+width: auto;
+height: auto;
+}
