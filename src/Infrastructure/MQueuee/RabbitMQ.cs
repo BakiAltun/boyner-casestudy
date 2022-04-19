@@ -46,7 +46,7 @@ namespace Boyner.CaseStudy.Infrastructure.RabbitMQ
                 channel.QueueDeclare(queue: _routingKey,
                                               durable: true,
                                               exclusive: false,
-                                              autoDelete: false,
+                                              autoDelete: true,
                                               arguments: null);
 
                 // channel.ExchangeDeclare(exchange: BROKER_NAME, type: "direct");
@@ -97,7 +97,7 @@ namespace Boyner.CaseStudy.Infrastructure.RabbitMQ
             channel.QueueDeclare(queue: _routingKey,
                                     durable: true,
                                     exclusive: false,
-                                    autoDelete: false,
+                                    autoDelete: true,
                                     arguments: null);
 
             channel.CallbackException += (sender, ea) =>
